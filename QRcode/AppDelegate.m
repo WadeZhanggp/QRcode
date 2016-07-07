@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "QRcodeController.h"
 
 @interface AppDelegate ()
 
@@ -18,10 +19,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    ViewController *root = [[ViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
+//    [self.window setRootViewController:nav];
+//    [self.window makeKeyAndVisible];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    ViewController *root = [[ViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
-    [self.window setRootViewController:nav];
+    QRcodeController *root = [[QRcodeController alloc] init];
+    [self.window setRootViewController:root];
     [self.window makeKeyAndVisible];
     return YES;
 }

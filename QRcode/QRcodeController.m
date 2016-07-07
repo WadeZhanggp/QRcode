@@ -8,6 +8,10 @@
 
 #import "QRcodeController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "InPutView.h"
+#import "QRAnimationView.h"
+
+#define SIZE [UIScreen mainScreen].bounds.size
 
 @interface QRcodeController ()<AVCaptureMetadataOutputObjectsDelegate>
 //输入设备 采集摄像头扑捉信息
@@ -19,13 +23,68 @@
 // 关联输入设备和输出设备：会话
 @property (nonatomic, strong) AVCaptureSession *session;
 
+@property (nonatomic, strong) InPutView *inputView;
+
 @end
 
 @implementation QRcodeController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
+    [self initCaptureDevice];
+    [self initNavgationBar];
+    [self initQRAnimationView];
+    
+}
+
+- (void)initNavgationBar{
+    
+    UIView *navgationView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SIZE.width, 44)];
+    navgationView.backgroundColor = [UIColor colorWithRed:69/255.0 green:190/255.0 blue:199/255.0 alpha:1];
+    [self.view addSubview:navgationView];
+    
+    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SIZE.width, 20)];
+    
+    statusBarView.backgroundColor = [UIColor colorWithRed:69/255.0 green:190/255.0 blue:199/255.0 alpha:1];
+    [self.view addSubview:statusBarView];
+    [self prefersStatusBarHidden];
+    
+    UIImageView *backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back_arrow"]];
+    backView.frame = CGRectMake(8, 6, 28, 28);
+    [navgationView addSubview:backView];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((SIZE.width - 100)/2, 6, 100, 28)];
+    titleLabel.text = @"扫码";
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [navgationView addSubview:titleLabel];
+    
+    UIButton *inPutButton = [[UIButton alloc] initWithFrame:CGRectMake(SIZE.width - 8 - 60, 6, 60, 28)];
+    inPutButton.backgroundColor = [UIColor clearColor];
+    inPutButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [inPutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [inPutButton setTitle:@"手动输入" forState:UIControlStateNormal];
+    [inPutButton addTarget:self action:@selector(inPutAction) forControlEvents:UIControlEventTouchUpInside];
+    [navgationView addSubview:inPutButton];
+    
+    self.inputView = [[InPutView alloc] initWithFrame:CGRectMake(8, 6, SIZE.width - 16, 28)];
+    [self.inputView setHidden:YES];
+    [navgationView addSubview:self.inputView];
+}
+
+- (void)initQRAnimationView{
+    
+    QRAnimationView *animationView = [[QRAnimationView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
+    animationView.center = self.view.center;
+    [self.view addSubview:animationView];
+    
+}
+
+- (void)initCaptureDevice{
+    
     // Do any additional setup after loading the view.
     //1.创建输入设备
     //AVCaptureDevice 设备 :  摄像头(video) 麦克风(audio)
@@ -51,23 +110,27 @@
         [self.session addOutput:self.outPut];
     }
     
-    //高数数据类型 二维码类型
-    self.outPut.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    //高数数据类型 条形码类型
+    self.outPut.metadataObjectTypes = @[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     
     //扫描框大小
-    [self.session setSessionPreset:AVCaptureSessionPreset640x480];
+    //[self.session setSessionPreset:AVCaptureSessionPreset640x480];
+    
     
     
     //5.指定layer的frame然后添加到view上
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     self.previewLayer.frame = self.view.bounds;
-    
+    //self.previewLayer.backgroundColor = [UIColor redColor];
+    //self.view.backgroundColor = [UIColor redColor];
     [self.view.layer addSublayer:self.previewLayer];
     
     //开启会话
     [self.session startRunning];
+    
 }
 
+#pragma mark ----captureDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
     
     AVMetadataMachineReadableCodeObject *objc = [metadataObjects firstObject];
@@ -77,8 +140,20 @@
     [self.session stopRunning];
     //移除layer
     [self.previewLayer removeFromSuperlayer];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.inputView.inputTextField resignFirstResponder];
+    //[self.navigationController popViewControllerAnimated:YES];
     
+}
+
+#pragma mark ----buttonAction
+- (void)inPutAction{
+    [self.inputView setHidden:NO];
+}
+
+#pragma mark ----hidenKeyBoard
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.inputView.inputTextField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,14 +161,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

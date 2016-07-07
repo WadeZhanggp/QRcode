@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		399EF0FB1D2D20FF004166CA /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 399EF0FA1D2D20FF004166CA /* back_arrow.png */; };
+		399EF0FE1D2D2596004166CA /* InPutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 399EF0FD1D2D2596004166CA /* InPutView.m */; };
+		399EF1011D2D334D004166CA /* QRAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 399EF1001D2D334D004166CA /* QRAnimationView.m */; };
 		39E54FD21D1E9C0600FC1F06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E54FD11D1E9C0600FC1F06 /* main.m */; };
 		39E54FD51D1E9C0600FC1F06 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E54FD41D1E9C0600FC1F06 /* AppDelegate.m */; };
 		39E54FD81D1E9C0600FC1F06 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E54FD71D1E9C0600FC1F06 /* ViewController.m */; };
@@ -36,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		399EF0FA1D2D20FF004166CA /* back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_arrow.png; sourceTree = "<group>"; };
+		399EF0FC1D2D2596004166CA /* InPutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InPutView.h; sourceTree = "<group>"; };
+		399EF0FD1D2D2596004166CA /* InPutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InPutView.m; sourceTree = "<group>"; };
+		399EF0FF1D2D334D004166CA /* QRAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRAnimationView.h; sourceTree = "<group>"; };
+		399EF1001D2D334D004166CA /* QRAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRAnimationView.m; sourceTree = "<group>"; };
 		39E54FCD1D1E9C0600FC1F06 /* QRcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRcode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39E54FD11D1E9C0600FC1F06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		39E54FD31D1E9C0600FC1F06 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,6 +118,11 @@
 				39E54FD71D1E9C0600FC1F06 /* ViewController.m */,
 				39E550091D1E9F7800FC1F06 /* QRcodeController.h */,
 				39E5500A1D1E9F7800FC1F06 /* QRcodeController.m */,
+				399EF0FC1D2D2596004166CA /* InPutView.h */,
+				399EF0FD1D2D2596004166CA /* InPutView.m */,
+				399EF0FF1D2D334D004166CA /* QRAnimationView.h */,
+				399EF1001D2D334D004166CA /* QRAnimationView.m */,
+				399EF0FA1D2D20FF004166CA /* back_arrow.png */,
 				39E54FD91D1E9C0600FC1F06 /* Main.storyboard */,
 				39E54FDC1D1E9C0600FC1F06 /* Assets.xcassets */,
 				39E54FDE1D1E9C0600FC1F06 /* LaunchScreen.storyboard */,
@@ -251,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				399EF0FB1D2D20FF004166CA /* back_arrow.png in Resources */,
 				39E54FE01D1E9C0600FC1F06 /* LaunchScreen.storyboard in Resources */,
 				39E54FDD1D1E9C0600FC1F06 /* Assets.xcassets in Resources */,
 				39E54FDB1D1E9C0600FC1F06 /* Main.storyboard in Resources */,
@@ -280,8 +294,10 @@
 			files = (
 				39E54FD81D1E9C0600FC1F06 /* ViewController.m in Sources */,
 				39E54FD51D1E9C0600FC1F06 /* AppDelegate.m in Sources */,
+				399EF1011D2D334D004166CA /* QRAnimationView.m in Sources */,
 				39E54FD21D1E9C0600FC1F06 /* main.m in Sources */,
 				39E5500B1D1E9F7800FC1F06 /* QRcodeController.m in Sources */,
+				399EF0FE1D2D2596004166CA /* InPutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +523,7 @@
 				39E54FFC1D1E9C0600FC1F06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39E54FFD1D1E9C0600FC1F06 /* Build configuration list for PBXNativeTarget "QRcodeTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +532,7 @@
 				39E54FFF1D1E9C0600FC1F06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39E550001D1E9C0600FC1F06 /* Build configuration list for PBXNativeTarget "QRcodeUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +541,7 @@
 				39E550021D1E9C0600FC1F06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
