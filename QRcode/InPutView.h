@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol InputViewDelegate <NSObject>
+
+@optional
+
+- (void)inputCertainAction;
+
+@end
+
 @interface InPutView : UIView
 
 @property (nonatomic, strong) UITextField *inputTextField;
+
+@property (nonatomic, weak) id<InputViewDelegate>delegate;
 
 @end

@@ -1,0 +1,59 @@
+//
+//  PrefixHeader.pch
+//  QRcode
+//
+//  Created by 张光鹏 on 16/7/7.
+//  Copyright © 2016年 WadeZhang. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define SIZE [UIScreen mainScreen].bounds.size
+#define NAVGATIONCOLOR [UIColor colorWithRed:11/255.0 green:211/255.0 blue:166/255.0 alpha:0.25]
+#define POINTCOLOR [UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1]
+#define TEXTCOLOR [UIColor colorWithRed:100/255.0 green:95/255.0 blue:93/255.0 alpha:1]
+#define CERTAINCOLOR [UIColor colorWithRed:39/255.0 green:214/255.0 blue:166/255.0 alpha:1]
+
+#define IS_IPHONE_4 ([UIScreen mainScreen].bounds.size.height == 960/2)
+#define IS_IPHONE_5 ([UIScreen mainScreen].bounds.size.height == 1136/2)
+#define IS_IPHONE_6 ([UIScreen mainScreen].bounds.size.height == 1334/2)
+#define IS_IPHONE_6P ([UIScreen mainScreen].bounds.size.height == 2208/3)
+#define SIZE [UIScreen mainScreen].bounds.size
+//修改CGRectMake
+CG_INLINE CGRect
+
+CGRectMakePlus(CGFloat x, CGFloat y, CGFloat width, CGFloat height)
+
+{
+    
+    float autoSizeScaleX;
+    float autoSizeScaleY;
+    
+    if(IS_IPHONE_6P){
+        
+        autoSizeScaleX = 1.0;
+        
+        autoSizeScaleY = 1.0;
+        
+    }else{
+        
+        autoSizeScaleX = SIZE.width/414;
+        
+        autoSizeScaleY = SIZE.height/736;
+        
+    }
+    
+    CGRect rect;
+    
+    rect.origin.x = x * autoSizeScaleX;
+    rect.origin.y = y * autoSizeScaleY;
+    rect.size.width = width * autoSizeScaleX;
+    rect.size.height = height * autoSizeScaleY;
+    
+    return rect;
+    
+}
+
+
+#endif /* PrefixHeader_pch */

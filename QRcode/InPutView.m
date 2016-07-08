@@ -7,6 +7,7 @@
 //
 
 #import "InPutView.h"
+#import "PrefixHeader.pch"
 
 #define SIZE [UIScreen mainScreen].bounds.size
 
@@ -32,18 +33,20 @@
 
 - (void)createUI{
     
-    self.backgroundColor = [UIColor colorWithRed:69/255.0 green:190/255.0 blue:199/255.0 alpha:1];
+    self.backgroundColor = [UIColor clearColor];
     
-    self.inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width - 20 - 50, 28)];
+    self.inputTextField = [[UITextField alloc] initWithFrame:CGRectMakePlus(0, 0, 320, 32)];
     self.inputTextField.layer.cornerRadius = 5;
     self.inputTextField.backgroundColor = [UIColor whiteColor];
     self.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.inputTextField.placeholder = @"请手动输入您的条形码数字编码";
+    self.inputTextField.adjustsFontSizeToFitWidth = YES;
     self.inputTextField.textColor = [UIColor grayColor];
+    self.inputTextField.clearButtonMode = UITextFieldViewModeAlways;
     [self addSubview:self.inputTextField];
     
-    UIButton *certainButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 50, 0, 50, 28)];
-    certainButton.backgroundColor = [UIColor greenColor];
+    UIButton *certainButton = [[UIButton alloc] initWithFrame:CGRectMakePlus(330, 0, 68, 32)];
+    certainButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:216/255.0 blue:167/255.0 alpha:1];
     certainButton.layer.cornerRadius = 5;
     [certainButton setTitle:@"确认" forState:UIControlStateNormal];
     [certainButton addTarget:self action:@selector(certainAction) forControlEvents:UIControlEventTouchUpInside];
@@ -55,6 +58,9 @@
     
     [self setHidden:YES];
     [self.inputTextField resignFirstResponder];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(inputCertainAction)]) {
+        [self.delegate inputCertainAction];
+    }
     
 }
 

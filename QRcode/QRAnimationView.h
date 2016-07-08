@@ -10,4 +10,8 @@
 
 @interface QRAnimationView : UIView
 
+- (void)setTipsWithTitle:(NSString *)title;
+
+- (void)stopAnimation;
+
 @end
